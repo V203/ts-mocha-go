@@ -30,7 +30,6 @@ function greet(person) {
     return `Hello, ${person.first_name} ${person.last_name}`;
 }
 exports.default = greet;
-console.log(grtCtr.getMp());
 class GreetInXhosa {
     greet(name) {
         return "Molo, " + name;

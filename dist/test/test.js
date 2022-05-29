@@ -50,19 +50,25 @@ describe("Greet test functions", function () {
     });
     it("We should be able to implement the map object literal.", () => {
         let mp = new Map();
-        // let grt_ctr =new Greet_counter_user ()
         mp.set("Pete", 1);
         mp.get("Pete");
-        console.log(mp.get("Pete"));
-        console.log();
+        assert_1.default.strictEqual(1, mp.get("Pete"));
     });
     it("We should be able to Pete, Bolly and Jake then return with three mentioned people", () => {
-        let mp = new Map();
         (0, greet_1.default)({ first_name: "Jake", last_name: "Joe" });
         (0, greet_1.default)({ first_name: "Pete", last_name: "Joe" });
         (0, greet_1.default)({ first_name: "Bolly", last_name: "Joe" });
         let actual = greet_1.grtCtr.getMp();
         let expected = greet_1.grtCtr.getMp();
+        assert_1.default.strictEqual(expected, actual);
+    });
+    it("We should be Scott three times and return counter greet of 3", () => {
+        (0, greet_1.default)({ first_name: "Scott", last_name: "Joe" });
+        (0, greet_1.default)({ first_name: "Scott", last_name: "Joe" });
+        (0, greet_1.default)({ first_name: "Scott", last_name: "Joe" });
+        (0, greet_1.default)({ first_name: "Mat", last_name: "Stone" });
+        let actual = greet_1.grtCtr.userGreetCount({ first_name: "Scott", last_name: "Joe" });
+        let expected = 3;
         assert_1.default.strictEqual(expected, actual);
     });
 });
