@@ -1,17 +1,36 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Spanish_greet = exports.GreetInEnglish = exports.GreetInXhosa = void 0;
+exports.Spanish_greet = exports.GreetInEnglish = exports.GreetInXhosa = exports.mp = exports.grtCtr = void 0;
+const mp = new Map();
+exports.mp = mp;
+let grtCtr = {
+    mp: new Map(),
+    countGreet(person) {
+        if (person.first_name && !mp.has(person.first_name)) {
+            mp.set(person.first_name, 1);
+        }
+        else if (mp.has(person.first_name)) {
+            let temp_count = mp.get(person.first_name);
+            temp_count++;
+            mp.set(person.first_name, temp_count);
+        }
+    },
+    greetCounter() { return mp.size; },
+    userGreetCount(person) {
+        return mp.get(person.first_name);
+    },
+    getMp() {
+        return mp;
+    }
+};
+exports.grtCtr = grtCtr;
 function greet(person) {
-    return `Hello, ${person.first_name} ${person.last_name} will be in touch at ${person.email}`;
+    mp;
+    grtCtr.countGreet({ first_name: person.first_name, last_name: person.last_name });
+    return `Hello, ${person.first_name} ${person.last_name}`;
 }
 exports.default = greet;
-// export class counter implements Greet_counter_user {
-//     constructor() {
-//         countGreet(firstName: string): void {
-//         }
-//         greetCounter: number;
-//     }
-// }
+console.log(grtCtr.getMp());
 class GreetInXhosa {
     greet(name) {
         return "Molo, " + name;

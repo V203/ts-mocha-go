@@ -1,48 +1,65 @@
 import Person from "./person";
-import Greet_counter_user from "./grtCtr";
-
-var mp = new Map<string, number>()
-export default function greet(person: Person) {
-    
-    let msg = `Hello, ${person.first_name} ${person.last_name} will be in touch at ${person.email}`;
+import  {GrtCtr}  from "./grtCtr";
 
 
-     function count(person: Person) {
-        if (person.last_name && person.first_name) {
-            mp.set(person.first_name, 1)
 
-        } else if (mp.has(person.first_name)) {
-            mp.get(person.first_name)
+const mp:any= new Map<string,number>()
+let grtCtr:GrtCtr = {
+    mp:  new Map<string,number>(),
+    countGreet(person:Person){
+        if(person.first_name && !mp.has(person.first_name)){
+            mp.set(person.first_name,1)
+                        
+        }else if(mp.has(person.first_name)){
+            
+            let temp_count = mp.get(person.first_name)
+            temp_count++
+
+            mp.set(person.first_name,temp_count )
+            
         }
+
+    },
+
+    greetCounter() {return mp.size},
+    userGreetCount(person:Person){
+        return mp.get(person.first_name)
+    },
+
+    getMp(){
+        return mp;
     }
-
-    return { msg };
+    
 }
 
-export function getMp(){
-    return mp;
+export {grtCtr,mp}
+
+
+
+
+export default function greet  (person: Person)   {
+
+    mp
+    grtCtr.countGreet({first_name:person.first_name,last_name:person.last_name});
+
+    
+
+return `Hello, ${person.first_name} ${person.last_name}`;
+
+
 
 }
+console.log(grtCtr.getMp());
+
+
+
 
 export interface GreetIn {
     greet(name: string): string;
 }
 
-// export interface Greet_counter_user {
-//     countGreet(firstName: string): void // returns nothing
-//     greetCounter: number
-//     userGreetCount(firstName: string): number
-// }
 
-// export class counter implements Greet_counter_user {
-//     constructor() {
-//         countGreet(firstName: string): void {
 
-//         }
-
-//         greetCounter: number;
-//     }
-// }
 export class GreetInXhosa implements GreetIn {
     greet(name: string) {
         return "Molo, " + name;

@@ -1,11 +1,8 @@
-import greet, { getMp } from "./greet"
-import Greet_counter_user from "./grtCtr"
+// import greet,{ grtCtr } from "./greet";
 
 
+// // greet({first_name:"Vuyisa",last_name:"Ndubela"});
+// // greet({first_name:"Vuyisa",last_name:"Ndubela"});
+// // greet({first_name:"Vuyisa",last_name:"Ndubela"});
 
-import mp from "./greet"
-
-
-
-console.log(greet({first_name:"Bob",last_name:"Phill"}));
-console.log(getMp().get("Bob"));
+// console.log(grtCtr.getMp());

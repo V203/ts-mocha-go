@@ -1,7 +1,9 @@
-import greet, { GreetInEnglish, Spanish_greet } from "../greet";
+import greet, {grtCtr, GreetInEnglish, Spanish_greet } from "../greet";
 import { GreetInXhosa } from "../greet";
 // import { Greet_counter_user } from "../";
+import Person from "../person";
 import assert from "assert";
+import { stringify } from "querystring";
 
 
 describe("Greet test functions", function () {
@@ -11,7 +13,7 @@ describe("Greet test functions", function () {
 
     it('Should be able to greet Bob', () => {
 
-        // assert.strictEqual(greet({ first_name: "Bob", last_name: "Crow", email: "bobcrow@email.com" }), "Hello, Bob Crow will be in touch at bobcrow@email.com");
+        assert.strictEqual(greet({ first_name: "Bob", last_name: "Crow", email: "bobcrow@email.com" }), "Hello, Bob Crow");
 
     })
 
@@ -48,6 +50,23 @@ describe("Greet test functions", function () {
         
     });
 
+    it("We should be able to Pete, Bolly and Jake then return with three mentioned people",()=>{
+        let mp = new Map<string,number>()
+
+        greet({first_name:"Jake",last_name:"Joe"});
+        greet({first_name:"Pete",last_name:"Joe"})
+        greet({first_name:"Bolly",last_name:"Joe"})
+
+        
+        let actual = grtCtr.getMp();
+        let expected = grtCtr.getMp();
+
+        assert.strictEqual(expected,actual)
+        
+        
+        
+        
+    });
   
 
 

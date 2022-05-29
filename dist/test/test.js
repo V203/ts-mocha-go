@@ -28,14 +28,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const greet_1 = __importStar(require("../greet"));
 const greet_2 = require("../greet");
-// import { Greet_counter_user } from "../greet";
 const assert_1 = __importDefault(require("assert"));
 describe("Greet test functions", function () {
     it("should test", function () {
         assert_1.default.equal(2, 2);
     });
     it('Should be able to greet Bob', () => {
-        assert_1.default.strictEqual((0, greet_1.default)({ first_name: "Bob", last_name: "Crow", email: "bobcrow@email.com" }), "Hello, Bob Crow will be in touch at bobcrow@email.com");
+        assert_1.default.strictEqual((0, greet_1.default)({ first_name: "Bob", last_name: "Crow", email: "bobcrow@email.com" }), "Hello, Bob Crow");
     });
     it("Should be able to greet in Xhosa", () => {
         let xhosa_greet = new greet_2.GreetInXhosa();
@@ -56,5 +55,14 @@ describe("Greet test functions", function () {
         mp.get("Pete");
         console.log(mp.get("Pete"));
         console.log();
+    });
+    it("We should be able to Pete, Bolly and Jake then return with three mentioned people", () => {
+        let mp = new Map();
+        (0, greet_1.default)({ first_name: "Jake", last_name: "Joe" });
+        (0, greet_1.default)({ first_name: "Pete", last_name: "Joe" });
+        (0, greet_1.default)({ first_name: "Bolly", last_name: "Joe" });
+        let actual = greet_1.grtCtr.getMp();
+        let expected = greet_1.grtCtr.getMp();
+        assert_1.default.strictEqual(expected, actual);
     });
 });
