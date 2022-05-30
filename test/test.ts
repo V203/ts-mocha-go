@@ -1,4 +1,4 @@
-import greet, {grtCtr, GreetInEnglish, Spanish_greet } from "../greet";
+import greet, {grtCtr, GreetInEnglish, Spanish_greet, Greeter,lang } from "../greet";
 import { GreetInXhosa } from "../greet";
 import assert from "assert";
 import Person from "../person"
@@ -65,6 +65,23 @@ describe("Greet test functions", function () {
 
         assert.strictEqual(expected,actual)    
         
+    });
+
+    it("Should be able to greet Various people utilizing the greeter class in English, Xhosa and Spanish",()=>{
+
+        let grtMap: Map<string,GreetIn> =new Map();
+
+        grtMap.set(lang.span,new Spanish_greet());
+        grtMap.set(lang.eng,new GreetInEnglish());
+        grtMap.set(lang.xhos,new GreetInXhosa());
+
+        let greeter = new Greeter(grtMap);
+
+   
+
+        assert.strictEqual("Hello, Billy",greeter.greet("Billy",lang.eng));
+        assert.strictEqual("Salve, Steve",greeter.greet("Steve",lang.span));
+        assert.strictEqual("Molo, Jimmy",greeter.greet("Jimmy",lang.xhos));
     });
 });
 

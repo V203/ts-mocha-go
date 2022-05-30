@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Spanish_greet = exports.GreetInEnglish = exports.GreetInXhosa = exports.mp = exports.grtCtr = void 0;
+exports.lang = exports.Greeter = exports.Spanish_greet = exports.GreetInEnglish = exports.GreetInXhosa = exports.mp = exports.grtCtr = void 0;
 const mp = new Map();
 exports.mp = mp;
 let grtCtr = {
@@ -48,3 +48,22 @@ class Spanish_greet {
     }
 }
 exports.Spanish_greet = Spanish_greet;
+class Greeter {
+    constructor(greetLanguages) {
+        this.greetLanguages = greetLanguages;
+    }
+    greet(name, chosenLanguages) {
+        let greetIn = this.greetLanguages.get(chosenLanguages);
+        if (greetIn) {
+            return greetIn.greet(name);
+        }
+        return "";
+    }
+}
+exports.Greeter = Greeter;
+let lang = {
+    span: "span",
+    eng: "english",
+    xhos: "xhosa"
+};
+exports.lang = lang;

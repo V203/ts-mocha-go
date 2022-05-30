@@ -71,4 +71,14 @@ describe("Greet test functions", function () {
         let expected = 3;
         assert_1.default.strictEqual(expected, actual);
     });
+    it("Should be able to greet Various people utilizing the greeter class in English, Xhosa and Spanish", () => {
+        let grtMap = new Map();
+        grtMap.set(greet_1.lang.span, new greet_1.Spanish_greet());
+        grtMap.set(greet_1.lang.eng, new greet_1.GreetInEnglish());
+        grtMap.set(greet_1.lang.xhos, new greet_2.GreetInXhosa());
+        let greeter = new greet_1.Greeter(grtMap);
+        assert_1.default.strictEqual("Hello, Billy", greeter.greet("Billy", greet_1.lang.eng));
+        assert_1.default.strictEqual("Salve, Steve", greeter.greet("Steve", greet_1.lang.span));
+        assert_1.default.strictEqual("Molo, Jimmy", greeter.greet("Jimmy", greet_1.lang.xhos));
+    });
 });

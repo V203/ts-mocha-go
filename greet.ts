@@ -64,3 +64,40 @@ export class Spanish_greet implements GreetIn {
         return `Salve, ${name}`;
     }
 }
+
+export class Greeter {
+
+    private greetLanguages:Map<string,GreetIn>;
+
+    constructor(greetLanguages:Map<string,GreetIn>){
+
+        this.greetLanguages = greetLanguages;
+    }
+
+    greet(name:string,chosenLanguages:string){
+        let greetIn = this.greetLanguages.get(chosenLanguages);
+
+        if(greetIn){
+
+            return greetIn.greet(name);
+
+        }
+        return "";
+    }
+}
+
+
+interface Language{
+    span:string,
+    eng:string,
+    xhos:string
+
+}
+
+let lang:Language={
+    span : "span",
+    eng:  "english",
+    xhos: "xhosa"
+}
+export {lang}
+
