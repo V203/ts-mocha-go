@@ -1,7 +1,7 @@
-import greet, {grtCtr, GreetInEnglish, Spanish_greet, Greeter,lang } from "../greet";
+import greet, {grtCtr, GreetInEnglish, Spanish_greet, Greeter,lang, MapUserGreetCounter } from "../greet";
 import { GreetInXhosa } from "../greet";
 import assert from "assert";
-import Person from "../person"
+
 
 describe("Greet test functions", function () {
     it("should test", function () {
@@ -74,8 +74,9 @@ describe("Greet test functions", function () {
         grtMap.set(lang.span,new Spanish_greet());
         grtMap.set(lang.eng,new GreetInEnglish());
         grtMap.set(lang.xhos,new GreetInXhosa());
+        let mpuser = new MapUserGreetCounter();
 
-        let greeter = new Greeter(grtMap);
+        let greeter = new Greeter(grtMap,mpuser);
 
    
 
@@ -83,5 +84,55 @@ describe("Greet test functions", function () {
         assert.strictEqual("Salve, Steve",greeter.greet("Steve",lang.span));
         assert.strictEqual("Molo, Jimmy",greeter.greet("Jimmy",lang.xhos));
     });
+
+
+    it("Should be able to greet four people and return the size of four.",()=>{
+
+        let grtMap: Map<string,GreetIn> =new Map();
+
+        grtMap.set(lang.span,new Spanish_greet());
+        grtMap.set(lang.eng,new GreetInEnglish());
+        grtMap.set(lang.xhos,new GreetInXhosa());
+        let mpuser = new MapUserGreetCounter();
+
+        let greeter = new Greeter(grtMap,mpuser);
+
+        greeter.greet("Pete",lang.eng);
+        greeter.greet("Scott",lang.xhos)
+        greeter.greet("Billy",lang.eng)
+        greeter.greet("Blake",lang.span)
+
+        let actual = greeter.greetCounter;
+        let expected = 4;
+
+        assert.equal(actual,expected);
+
+
+    })
+
+    it("Should be able to greet Pete 3 times and userGreetCount should return 3 to indicate that Scott has been greeted three times.",()=>{
+
+        let grtMap: Map<string,GreetIn> =new Map();
+
+        grtMap.set(lang.span,new Spanish_greet());
+        grtMap.set(lang.eng,new GreetInEnglish());
+        grtMap.set(lang.xhos,new GreetInXhosa());
+        let mpuser = new MapUserGreetCounter();
+
+        let greeter = new Greeter(grtMap,mpuser);
+
+        greeter.greet("Pete",lang.eng);
+        greeter.greet("Pete",lang.xhos)
+        greeter.greet("Pete",lang.span)
+        greeter.greet("Blake",lang.span)
+
+        let actual = greeter.userGreetCount("Pete");
+        let expected = 3;
+
+        assert.equal(actual,expected);
+
+
+    })
+
 });
 

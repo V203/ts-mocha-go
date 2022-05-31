@@ -1,25 +1,38 @@
 "use strict";
-// import greet,{ GreetInXhosa,GreetInEnglish,Spanish_greet, GreetIn} from "./greet";
-//  let grtMap: Map<string,GreetIn> =new Map();
-//  grtMap.set(lang.span,new Spanish_greet());
-//  grtMap.set(lang.eng,new GreetInEnglish());
-//  grtMap.set(lang.xhos,new GreetInXhosa());
-//  var eng = grtMap.get(lang.eng);
-//  var xhos = grtMap.get(lang.xhos);
-//  var span = grtMap.get(lang.span);
-//  console.log(span?.greet("Vuyisa"));
-// export class Greeter {
-//     private greetLanguages:Map<string,GreetIn>;
-//     constructor(greetLanguages:Map<string,GreetIn>){
-//         this.greetLanguages = greetLanguages;
+// import { GrtCtr } from "./grtCtr";
+// import Person from "./person";
+// import { GreetIn } from "./greet";
+Object.defineProperty(exports, "__esModule", { value: true });
+const greet_1 = require("./greet");
+// class MapUserGreetCounter implements GrtCtr {
+//     constructor() {
+//         this.mp = new Map<string, number>()
+//         // this.temp_count = 0;
+//         // this.temp_count:number = 0;
 //     }
-//     greet(name:string,chosenLanguages:string){
-//         let greetIn = this.greetLanguages.get(chosenLanguages);
-//         if(greetIn){
-//             return greetIn.greet(name);
+//     mp: Map<string, number>;
+//     getMp() {
+//         return;
+//     }
+//     temp_count = 0;
+//     countGreet(person: Person) {
+//         if (person.first_name && !this.mp.has(person.first_name)) {
+//             this.mp.set(person.first_name, 1);
+//         } else if (this.mp.has(person.first_name)) {
+//             var temp_count = Number(this.mp.get(person.first_name));
+//             temp_count += 1;
+//             this.mp.set(person.first_name, Number(temp_count));            
 //         }
-//         return "";
+//     }
+//     greetCounter(): number {
+//         return this.mp.size;
+//     }
+//     userGreetCount(person:Person): number {
+//         return  Number(this.mp.get(person.first_name));
 //     }
 // }
-// let greeter = new Greeter(grtMap);
-// console.log(greeter.greet("James",lang.eng));
+let mop = new greet_1.MapUserGreetCounter();
+mop.countGreet({ first_name: "Mat" });
+mop.countGreet({ first_name: "Mat" });
+mop.countGreet({ first_name: "Mel" });
+console.log(mop.greetCounter());

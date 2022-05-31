@@ -8,5 +8,6 @@ export  interface GrtCtr {
     greetCounter(): number 
     userGreetCount(person:Person): number
     getMp():any
+    // temp_count:number
     
 }

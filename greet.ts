@@ -68,9 +68,10 @@ export class Spanish_greet implements GreetIn {
 export class Greeter {
 
     private greetLanguages:Map<string,GreetIn>;
-
-    constructor(greetLanguages:Map<string,GreetIn>){
-
+    private grtCtr:GrtCtr
+    // grtCtr
+    constructor(greetLanguages:Map<string,GreetIn>,grtCtr:GrtCtr){
+        this.grtCtr = grtCtr;
         this.greetLanguages = greetLanguages;
     }
 
@@ -78,12 +79,22 @@ export class Greeter {
         let greetIn = this.greetLanguages.get(chosenLanguages);
 
         if(greetIn){
-
+            this.grtCtr.countGreet({first_name:name});
             return greetIn.greet(name);
 
         }
         return "";
     }
+
+    
+    public get greetCounter() : number {
+        return this.grtCtr.greetCounter()
+    }
+
+    userGreetCount(first_name:string): number {
+        return this.grtCtr.userGreetCount({first_name:first_name});
+    }
+    
 }
 
 
@@ -101,3 +112,45 @@ let lang:Language={
 }
 export {lang}
 
+export class MapUserGreetCounter implements GrtCtr {
+
+    constructor() {
+        this.mp = new Map<string, number>()
+        // this.temp_count = 0;
+        // this.temp_count:number = 0;
+
+    }
+    mp: Map<string, number>;
+
+
+
+    getMp() {
+        return;
+    }
+    temp_count = 0;
+
+    countGreet(person: Person) {
+        if (person.first_name && !this.mp.has(person.first_name)) {
+            this.mp.set(person.first_name, 1);
+
+
+        } else if (this.mp.has(person.first_name)) {
+            var temp_count = Number(this.mp.get(person.first_name));
+            temp_count += 1;
+
+            this.mp.set(person.first_name, Number(temp_count));            
+        }
+
+    }
+
+    greetCounter(): number {
+        return this.mp.size;
+
+    }
+
+    userGreetCount(person:Person): number {
+        return  Number(this.mp.get(person.first_name));
+        
+    }
+
+}
