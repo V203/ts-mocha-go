@@ -1,5 +1,6 @@
 import Person from "./person";
 import { GrtCtr } from "./grtCtr";
+import { Greetable } from "./greetable";
 
 
 const mp: any = new Map<string, number>()
@@ -65,7 +66,7 @@ export class Spanish_greet implements GreetIn {
     }
 }
 
-export class Greeter {
+export class Greeter implements Greetable{
 
     private greetLanguages:Map<string,GreetIn>;
     private grtCtr:GrtCtr

@@ -1,55 +1,96 @@
-// import { GrtCtr } from "./grtCtr";
-// import Person from "./person";
-// import { GreetIn } from "./greet";
+import createConnectionPool, { sql } from '@databases/pg';
+import anyOf from "@databases/pg-typed"
 
-import {MapUserGreetCounter} from "./greet"
-// class MapUserGreetCounter implements GrtCtr {
 
-//     constructor() {
-//         this.mp = new Map<string, number>()
-//         // this.temp_count = 0;
-//         // this.temp_count:number = 0;
+const connectionString = process.env.DATABASE_URL || 'postgresql://codex-coder:pg123@localhost:5432/grtsdb';
 
-//     }
-//     mp: Map<string, number>;
+
+let db = createConnectionPool(connectionString)
+
+
+const Fct = () => {
 
 
 
-//     getMp() {
-//         return;
-//     }
-//     temp_count = 0;
 
-//     countGreet(person: Person) {
-//         if (person.first_name && !this.mp.has(person.first_name)) {
-//             this.mp.set(person.first_name, 1);
-
-
-//         } else if (this.mp.has(person.first_name)) {
-//             var temp_count = Number(this.mp.get(person.first_name));
-//             temp_count += 1;
-
-//             this.mp.set(person.first_name, Number(temp_count));            
-//         }
-
-//     }
-
-//     greetCounter(): number {
-//         return this.mp.size;
-
-//     }
-
-//     userGreetCount(person:Person): number {
-//         return  Number(this.mp.get(person.first_name));
+    const get_all_greets = async  () => {
+        let results;
+      results =  await db.query(sql`select * from greets`).finally(async ()=> await db.dispose())
+        // console.log(results);
         
+
+        return results
+
+
+
+    }
+
+
+    db.task(async (task)=>{
+        const name = await task.query(sql`select * from greets`)
+
+        console.log(name);
+        
+    });
+    
+    return {
+        get_all_greets,
+        
+    }
+    
+    
+}
+
+
+let f = Fct()
+
+
+let f__ = f.get_all_greets().then(data => data[2])
+
+console.log(  f__);
+
+;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// let pool = new Client({
+//     connectionString, ssl: {
+//         rejectUnauthorized: false
 //     }
+// });
+// // pool.
+
+// let Factory = async ()=>{
+
+// let get_all = await ()=>{
+//     return  ( (pool.query("select * from greets"))).rows
+// }
+
+// return{
+//     get_all
+// }
+
 
 // }
 
-let mop = new MapUserGreetCounter()
 
-mop.countGreet({ first_name: "Mat" });
-mop.countGreet({ first_name: "Mat" });
-mop.countGreet({ first_name: "Mel" });
+// let f = Factory();
 
-console.log(mop.greetCounter());
+// console.log(f.get_all());
+

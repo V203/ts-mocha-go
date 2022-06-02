@@ -49,6 +49,8 @@ class Spanish_greet {
 }
 exports.Spanish_greet = Spanish_greet;
 class Greeter {
+    greetLanguages;
+    grtCtr;
     // grtCtr
     constructor(greetLanguages, grtCtr) {
         this.grtCtr = grtCtr;
@@ -78,14 +80,15 @@ let lang = {
 exports.lang = lang;
 class MapUserGreetCounter {
     constructor() {
-        this.temp_count = 0;
         this.mp = new Map();
         // this.temp_count = 0;
         // this.temp_count:number = 0;
     }
+    mp;
     getMp() {
         return;
     }
+    temp_count = 0;
     countGreet(person) {
         if (person.first_name && !this.mp.has(person.first_name)) {
             this.mp.set(person.first_name, 1);
